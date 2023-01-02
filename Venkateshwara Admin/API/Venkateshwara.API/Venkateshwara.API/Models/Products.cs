@@ -9,5 +9,10 @@ namespace Venkateshwara.API.Models
         public float Price { get; set; }
         public int Rating { get; set; }
         public string? Image { get; set; }
+        public string? ProductTypeId { get; set; }
+    }
+
+    public class ProductType : BaseEntity
+    {
     }
 }
