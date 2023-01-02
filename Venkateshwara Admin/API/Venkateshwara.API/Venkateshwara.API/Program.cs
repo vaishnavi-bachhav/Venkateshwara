@@ -1,5 +1,6 @@
 using MongoDB.Driver;
 using Venkateshwara.API.Data;
+using Venkateshwara.API.Services.Career;
 using Venkateshwara.API.Services.News;
 using Venkateshwara.API.Services.Shared;
 using Venkateshwara.API.ViewModels;
@@ -22,6 +23,11 @@ var dbContext = new AppDbContext(database);
 builder.Services.AddSingleton<INewsService>((s) =>
 {
     return new NewsService(dbContext, s.GetRequiredService<ISharedService>());
+});
+
+builder.Services.AddSingleton<ICareerService>((s) =>
+{
+    return new CareerService(dbContext, s.GetRequiredService<ISharedService>());
 });
 
 var app = builder.Build();

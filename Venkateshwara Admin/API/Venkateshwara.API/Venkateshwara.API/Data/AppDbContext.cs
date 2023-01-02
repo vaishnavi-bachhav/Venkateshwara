@@ -3,7 +3,7 @@ using Venkateshwara.API.Models;
 
 namespace Venkateshwara.API.Data
 {
-    public class AppDbContext 
+    public class AppDbContext
     {
         private readonly IMongoDatabase _mongoDatabase;
 
@@ -25,6 +25,14 @@ namespace Venkateshwara.API.Data
             get
             {
                 return _mongoDatabase.GetCollection<Error>(nameof(Error));
+            }
+        }
+
+        public IMongoCollection<Career> Careers
+        {
+            get
+            {
+                return _mongoDatabase.GetCollection<Career>(nameof(Career));
             }
         }
     }
