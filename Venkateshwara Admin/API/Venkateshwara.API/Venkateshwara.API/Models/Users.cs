@@ -6,7 +6,6 @@ namespace Venkateshwara.API.Models
     {
         public string? Email { get; set; }
         public string? Password { get; set; }
-        public int MyProperty { get; set; }
         public UserRole Role { get; set; }
     }
 }

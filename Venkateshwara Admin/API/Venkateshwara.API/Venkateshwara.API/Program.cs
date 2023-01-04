@@ -1,8 +1,11 @@
 using MongoDB.Driver;
 using Venkateshwara.API.Data;
+using Venkateshwara.API.Services.Achievements;
 using Venkateshwara.API.Services.Career;
 using Venkateshwara.API.Services.News;
+using Venkateshwara.API.Services.Products;
 using Venkateshwara.API.Services.Shared;
+using Venkateshwara.API.Services.User;
 using Venkateshwara.API.ViewModels;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +31,24 @@ builder.Services.AddSingleton<INewsService>((s) =>
 builder.Services.AddSingleton<ICareerService>((s) =>
 {
     return new CareerService(dbContext, s.GetRequiredService<ISharedService>());
+});
+
+builder.Services.AddSingleton<IAchievementService>((s) =>
+{
+
+
+
+    return new AchievementService(dbContext, s.GetRequiredService<ISharedService>());
+});
+
+builder.Services.AddSingleton<IProductService>((s) =>
+{
+    return new ProductService(dbContext, s.GetRequiredService<ISharedService>());
+});
+
+builder.Services.AddSingleton<IUserService>((s) =>
+{
+    return new UserService(dbContext, s.GetRequiredService<ISharedService>());
 });
 
 var app = builder.Build();
