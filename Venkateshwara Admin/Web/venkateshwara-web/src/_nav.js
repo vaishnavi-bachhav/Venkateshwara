@@ -93,7 +93,7 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Add Career',
-        to: '/career/addcareer',
+        to: '/addcareer',
       },
       {
         component: CNavItem,

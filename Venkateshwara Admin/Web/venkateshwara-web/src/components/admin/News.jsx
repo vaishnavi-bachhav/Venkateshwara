@@ -18,6 +18,7 @@ export const News = () => {
     description: Yup.string().min(2, 'Description should be minimum 2 characters.').max(500, 'Description should be maximum 50 characters.').required('Description is required.'),
     image: Yup.mixed().required("Please select image"),
   });
+  
   return (
     <>
       <div className="container py-5">
