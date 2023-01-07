@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { News } from 'src/admin/News'
 
 import {
     CButton,
@@ -22,7 +21,6 @@ const Login = () => {
     return (
       
         <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
-              <News/>
             <CContainer>
                 <CRow className="justify-content-center">
                     <CCol md={8}>

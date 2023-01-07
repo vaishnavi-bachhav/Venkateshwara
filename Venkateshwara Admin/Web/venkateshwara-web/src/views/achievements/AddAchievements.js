@@ -1,44 +1,57 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import { TextField } from 'src/components/shared/TextField';
+import { TextAreaField } from 'src/components/shared/TextAreaField';
+import { FileField } from 'src/components/shared/FileField';
 
 const AddAchievements = () => {
+    const [initialValues, setInitialValues] = useState({
+        title: '',
+        date: new Date(),
+        image: '',
+        description: '',
+    });
+
+    const validationSchema = Yup.object().shape({
+        title: Yup.string().min(2, 'Title should be minimum 2 characters.').max(50, 'Title should be maximum 50 characters.').required('Title is required.'),
+        description: Yup.string().min(2, 'Description should be minimum 2 characters.').max(500, 'Description should be maximum 50 characters.').required('Description is required.'),
+        image: Yup.mixed().required("Please select image"),
+    });
+
     return (
         <div>
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="card card-success">
-                                <div class="card-header">
-                                    <h3 class="card-title">Achievements</h3>
+                            <div class="card">
+                                <div class="card-header bg-success">
+                                    <h3 class="card-title text-white">Achievements</h3>
                                 </div>
-                                <form id="quickForm">
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Achievement Name</label>
-                                            <input type="text" placeholder="Achievement Name " name="text" class="form-control rounded-0" id="exampleInputEmail1" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Achievement Description</label>
-                                            <input type="text" placeholder="Achievement Description" name="text" class="form-control rounded-0" id="exampleInputEmail1" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Achievement Date</label>
-                                            <input type="text" placeholder="Achievement Date" name="text" class="form-control rounded-0" id="exampleInputEmail1" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Achievement Image</label>
-                                            <input type="file" placeholder="Achievement Image" name="text" class=" rounded-0" id="exampleInputEmail1" />
-                                        </div>
-
-                                    </div>
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-success w-100">Upload</button>
-                                    </div>
-                                </form>
+                                <div className="card-body">
+                                <Formik
+                                    initialValues={initialValues}
+                                    validationSchema={validationSchema}
+                                    enableReinitialize
+                                    onSubmit={values => {
+                                        console.log("values", values)
+                                    }}
+                                >
+                                    {({ values, errors }) => (
+                                        <Form>
+                                            {/* <pre>{JSON.stringify(values, null, 102)}</pre>
+                                            <pre>{JSON.stringify(errors, null, 102)}</pre> */}
+                                            <TextField label="Name" name='title' type="text" />
+                                            <TextField label="Date" name='date' type="date" isRequired={false} />
+                                            <TextAreaField label="Description" name="description" isRequired={false} />
+                                            <FileField label="Image" name="image" />
+                                            <button className='btn btn-success text-white w-100' type='submit'>Add Achievement</button>
+                                        </Form>
+                                    )}
+                                </Formik>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-
                         </div>
                     </div>
                 </div>

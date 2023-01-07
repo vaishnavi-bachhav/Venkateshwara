@@ -26,7 +26,6 @@ const _nav = [
       text: 'NEW',
     },
   },
-
   {
     component: CNavItem,
     name: 'Register',
@@ -44,8 +43,6 @@ const _nav = [
     to: '/addproducts',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
     items: [
-
-
       {
         component: CNavItem,
         name: 'Add Products',
@@ -56,8 +53,6 @@ const _nav = [
         name: 'View Products',
         to: '/AllProducts',
       },
-
-
     ],
   },
   {
@@ -76,7 +71,6 @@ const _nav = [
         name: 'All News',
         to: '/allnews',
       },
-
     ],
   },
   {
@@ -89,7 +83,6 @@ const _nav = [
         name: 'Total Orders',
         to: '/totalorders',
       },
-
     ],
   },
   {
@@ -107,8 +100,6 @@ const _nav = [
         name: 'All Career',
         to: '/allcareer',
       },
-
-
     ],
   },
   {
@@ -126,11 +117,8 @@ const _nav = [
         name: 'Total Achievements',
         to: '/allachievements',
       },
-
     ],
   },
-
-
   {
     component: CNavTitle,
     name: 'Setting',
@@ -148,5 +136,4 @@ const _nav = [
     icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
   },
 ]
-
 export default _nav
