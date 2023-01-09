@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 import { TextField } from 'src/components/shared/TextField';
 import { TextAreaField } from 'src/components/shared/TextAreaField';
 import { FileField } from 'src/components/shared/FileField';
+import * as newsService from 'src/services/NewsService';
+import axios from 'axios';
 
 const AddNews = () => {
   const [initialValues, setInitialValues] = useState({
@@ -20,15 +22,56 @@ const AddNews = () => {
     image: Yup.mixed().required("Please select image"),
   });
 
+  const addNews = values => {
+    debugger;
+    
+    const payload = {
+      Name: values.title,
+      Image: values.image,
+      Description: values.description,
+      NewsDate: values.date
+    };
+
+    axios.post('https://localhost:7262/api/News', payload)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  
+    // return axios.post('https://localhost:7262/api/News', payload, {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     // 'userId': storage.getItem("userId"),
+    //     // 'pharmacyId': storage.getItem("pharmacyId"),
+    //     // 'Ocp-Apim-Subscription-Key': appConfig.SUBR_KEY,
+    //   }
+    // })
+    //   .then(response => response.data)
+    //   .catch(error => error.response);
+   // showLoader();
+  // newsService.addNews(values).then(response => {
+   // console.log("response", response);
+    //  hideLoader();
+    //   setAddNewsModalOpen(false)
+    //   response.status.toLowerCase() === 'success' ?
+    //    toast.success(response.message) :
+    //    toast.error(response.message);
+    //  getNews();
+   //});
+  }
+
   return (
     <div>
-      <section class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header bg-success">
-                  <h3 class="card-title text-white">News</h3>
+      <section className="content">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="card">
+                <div className="card-header bg-success">
+                  <h3 className="card-title text-white">News</h3>
                 </div>
                 <div className="card-body">
                   <Formik
@@ -36,6 +79,7 @@ const AddNews = () => {
                     validationSchema={validationSchema}
                     enableReinitialize
                     onSubmit={values => {
+                      addNews(values);
                       console.log("values", values)
                     }}
                   >

@@ -26,13 +26,13 @@ const AddCareer = () => {
 
   return (
     <div>
-      <section class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header bg-success">
-                  <h3 class="card-title text-white">Career</h3>
+      <section className="content">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="card">
+                <div className="card-header bg-success">
+                  <h3 className="card-title text-white">Career</h3>
                 </div>
                 <div className="card-body">
                   <Formik

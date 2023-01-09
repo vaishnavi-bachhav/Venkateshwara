@@ -3,28 +3,28 @@ import React from 'react'
 const AllAchievements = () => {
     return (
         <div>
-            <section class="content">
+            <section className="content">
 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="">
-                            <div class="card-header">
-                                {/* <div class="card-tools">
-                                    <div class="input-group input-group-sm" style={{ width: "150px;" }}>
-                                        <input type="text" name="table_search" class="form-control float-right"
+                <div className="row">
+                    <div className="col-12">
+                        <div className="">
+                            <div className="card-header">
+                                {/* <div className="card-tools">
+                                    <div className="input-group input-group-sm" style={{ width: "150px;" }}>
+                                        <input type="text" name="table_search" className="form-control float-right"
                                             placeholder="Search" />
 
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
+                                        <div className="input-group-append">
+                                            <button type="submit" className="btn btn-default">
+                                                <i className="fas fa-search"></i>
                                             </button>
                                         </div>
                                     </div>
                                 </div> */}
                             </div>
                             {/* <!-- /.card-header --> */}
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
+                            <div className="card-body table-responsive p-0">
+                                <table className="table table-hover text-nowrap">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -40,7 +40,7 @@ const AllAchievements = () => {
                                             <td>183</td>
                                             <td>John Doe</td>
                                             <td>11-7-2014</td>
-                                            <td><span class="tag tag-success">Approved</span></td>
+                                            <td><span className="tag tag-success">Approved</span></td>
                                             <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
                                             <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
 
@@ -49,7 +49,7 @@ const AllAchievements = () => {
                                             <td>219</td>
                                             <td>Alexander Pierce</td>
                                             <td>11-7-2014</td>
-                                            <td><span class="tag tag-warning">Pending</span></td>
+                                            <td><span className="tag tag-warning">Pending</span></td>
                                             <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
                                             <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
 
@@ -58,7 +58,7 @@ const AllAchievements = () => {
                                             <td>657</td>
                                             <td>Bob Doe</td>
                                             <td>11-7-2014</td>
-                                            <td><span class="tag tag-primary">Approved</span></td>
+                                            <td><span className="tag tag-primary">Approved</span></td>
                                             <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
                                             <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
                                         </tr>
@@ -66,7 +66,7 @@ const AllAchievements = () => {
                                             <td>175</td>
                                             <td>Mike Doe</td>
                                             <td>11-7-2014</td>
-                                            <td><span class="tag tag-danger">Denied</span></td>
+                                            <td><span className="tag tag-danger">Denied</span></td>
                                             <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
                                             <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
                                         </tr>

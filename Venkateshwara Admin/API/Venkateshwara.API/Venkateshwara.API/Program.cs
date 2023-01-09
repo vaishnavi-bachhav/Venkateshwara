@@ -17,11 +17,21 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(p => p.AddPolicy("corsPolicy", build =>
+{
+    build.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+}));
+
 var dbConfig = builder.Configuration.GetSection("DbConfig").Get<DbConfig>();
 
 var client = new MongoClient(dbConfig.ConnectionString);
 var database = client.GetDatabase(dbConfig.DatabaseName);
 var dbContext = new AppDbContext(database);
+
+builder.Services.AddSingleton<ISharedService>((s) =>
+{
+    return new SharedService(dbContext);
+});
 
 builder.Services.AddSingleton<INewsService>((s) =>
 {
@@ -35,9 +45,6 @@ builder.Services.AddSingleton<ICareerService>((s) =>
 
 builder.Services.AddSingleton<IAchievementService>((s) =>
 {
-
-
-
     return new AchievementService(dbContext, s.GetRequiredService<ISharedService>());
 });
 
@@ -63,6 +70,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors("corsPolicy");
 
 app.MapControllers();
 
