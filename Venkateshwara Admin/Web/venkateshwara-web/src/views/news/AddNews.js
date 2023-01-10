@@ -6,12 +6,13 @@ import { TextField } from 'src/components/shared/TextField';
 import { TextAreaField } from 'src/components/shared/TextAreaField';
 import { FileField } from 'src/components/shared/FileField';
 import * as newsService from 'src/services/NewsService';
-import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 const AddNews = () => {
   const [initialValues, setInitialValues] = useState({
     title: '',
-    date: new Date(),
+  //  date: new Date(),
     image: '',
     description: '',
   });
@@ -19,52 +20,27 @@ const AddNews = () => {
   const validationSchema = Yup.object().shape({
     title: Yup.string().min(2, 'Title should be minimum 2 characters.').max(50, 'Title should be maximum 50 characters.').required('Title is required.'),
     description: Yup.string().min(2, 'Description should be minimum 2 characters.').max(500, 'Description should be maximum 50 characters.').required('Description is required.'),
-    image: Yup.mixed().required("Please select image"),
+  //  image: Yup.mixed().required("Please select image"),
   });
+  const navigate = useNavigate();
 
   const addNews = values => {
     debugger;
-    
-    const payload = {
-      Name: values.title,
-      Image: values.image,
-      Description: values.description,
-      NewsDate: values.date
-    };
-
-    axios.post('https://localhost:7262/api/News', payload)
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-  
-    // return axios.post('https://localhost:7262/api/News', payload, {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     // 'userId': storage.getItem("userId"),
-    //     // 'pharmacyId': storage.getItem("pharmacyId"),
-    //     // 'Ocp-Apim-Subscription-Key': appConfig.SUBR_KEY,
-    //   }
-    // })
-    //   .then(response => response.data)
-    //   .catch(error => error.response);
-   // showLoader();
-  // newsService.addNews(values).then(response => {
-   // console.log("response", response);
-    //  hideLoader();
-    //   setAddNewsModalOpen(false)
-    //   response.status.toLowerCase() === 'success' ?
-    //    toast.success(response.message) :
-    //    toast.error(response.message);
-    //  getNews();
-   //});
+   newsService.addNews(values).then(response => {
+   console.log("response", response);
+      navigate("/allnews");
+   if(response){
+    toast.success("News added successfully");
+   }
+   else{
+    toast.error("News addition failed");
+   }
+   });
   }
 
   return (
     <div>
+       <ToastContainer theme="colored" limit={1} />
       <section className="content">
         <div className="container-fluid">
           <div className="row">
@@ -85,11 +61,11 @@ const AddNews = () => {
                   >
                     {({ values, errors }) => (
                       <Form>
-                        {/* <pre>{JSON.stringify(values, null, 102)}</pre>
-                                            <pre>{JSON.stringify(errors, null, 102)}</pre> */}
+                        <pre>{JSON.stringify(values, null, 102)}</pre>
+                                            <pre>{JSON.stringify(errors, null, 102)}</pre>
                         <TextField label="News Name" name='title' type="text" />
                         <TextAreaField label="News Description" name="description" isRequired={false} />
-                        <TextField label="Date" name='date' type="date" isRequired={false} />
+                        {/* <TextField label="Date" name='date' type="date" isRequired={false} /> */}
                         <FileField label="Image" name="image" />
                         <button className='btn btn-success text-white w-100' type='submit'>Add News</button>
                       </Form>

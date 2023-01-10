@@ -1,39 +1,31 @@
-import React from 'react'
+import * as newsService from 'src/services/NewsService';
+import React, { useState, useEffect } from 'react'
+import NewsItem from './NewsItem';
 
 const AllNews = () => {
+  const [news, setNews] = useState([]);
+
+  const getNews = () => {
+    newsService.getNews().then(response => {
+      console.log(response);
+      setNews(response);
+    });
+  }
+
+  useEffect(() => {
+    getNews();
+  }, []);
+
   return (
     <div>
       <section className="content">
         <div className="container p-5">
           <div className="row">
-            <div className="col-md-3 card m-2" style={{width: "18rem;"}}>
-              <img src="..." className="card-img-top" alt="..."/>
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">Some quick example text to build on the card title and make up the bulk of
-                    the card's content.</p>
-                </div>
-            </div>
-            <div className="col-md-3 card m-2" style={{width: "18rem;"}}>
-              <img src="..." className="card-img-top" alt="..."/>
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">Some quick example text to build on the card title and make up the bulk of
-                    the card's content.</p>
-                </div>
-            </div>
-            <div className="col-md-3 card m-2" style={{width: "18rem;"}}>
-              <img src="..." className="card-img-top" alt="..."/>
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">Some quick example text to build on the card title and make up the bulk of
-                    the card's content.</p>
-                </div>
-            </div>
-
+            {news.map((newsDetails, idx) => (
+              <NewsItem news={newsDetails} />
+            ))}
           </div>
         </div>
-
       </section>
     </div>
   )

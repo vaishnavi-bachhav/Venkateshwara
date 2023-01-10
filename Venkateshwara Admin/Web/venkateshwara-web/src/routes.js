@@ -40,8 +40,8 @@ const routes = [
   { path: '/AddProducts', name: 'products', element: AddProducts },
   { path: '/AllProducts', name: 'products', element: AllProducts },
 
-  { path: '/addnews', name: 'products', element: AddNews },
-  { path: '/allnews', name: 'products', element: AllNews },
+  { path: '/addnews', name: 'News', element: AddNews },
+  { path: '/allnews', name: 'News', element: AllNews },
 
   { path: '/totalorders', name: 'orders', element: TotalOrders },
 

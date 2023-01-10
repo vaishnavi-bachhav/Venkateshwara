@@ -4,7 +4,7 @@ using Venkateshwara.API.ViewModels;
 
 namespace Venkateshwara.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("news")]
     [ApiController]
     public class NewsController : ControllerBase
     {
@@ -22,10 +22,18 @@ namespace Venkateshwara.API.Controllers
                 return Ok(await _newsService.GetNews());
             }
             return Ok(await _newsService.GetNewsById(id));
+
         }
 
-        [HttpPost]
-        public async Task<IActionResult> SaveNews(NewsViewModel newsView)
+        [HttpGet("get-news")]
+        public async Task<IActionResult> GetNews()
+        {
+            return Ok(await _newsService.GetNews());
+        }
+
+
+        [HttpPost("save-news")]
+        public async Task<IActionResult> SaveNews([FromBody] NewsViewModel newsView)
         {
             if (string.IsNullOrWhiteSpace(newsView.Id))
             {

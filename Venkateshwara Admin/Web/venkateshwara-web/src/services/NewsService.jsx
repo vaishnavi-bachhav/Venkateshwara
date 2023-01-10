@@ -5,12 +5,12 @@ export const addNews = async (values) => {
   debugger;
     const payload = {
       Name: values.title,
-      Image: values.image,
+     // Image: values.image,
       Description: values.description,
-      NewsDate: values.date
+     // NewsDate: values.date
     };
   
-    return axios.post('https://localhost:7262/api/News', payload, {
+    return axios.post(api.SAVE_NEWS_API, payload, {
       headers: {
         'Content-Type': 'application/json',
         // 'userId': storage.getItem("userId"),
@@ -43,19 +43,19 @@ export const addNews = async (values) => {
 //       .catch(error => error.response);
 //   }
   
-//   export const getNews = async () => {
+  export const getNews = async () => {
   
-//     return axios.get(api.GET_NEWS_API, {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'userId': storage.getItem("userId"),
-//         'pharmacyId': storage.getItem("pharmacyId"),
-//         'Ocp-Apim-Subscription-Key': appConfig.SUBR_KEY,
-//       }
-//     })
-//       .then(response => response.data)
-//       .catch(error => error.response);
-//   }
+    return axios.get(api.GET_NEWS_API, {
+      headers: {
+        'Content-Type': 'application/json',
+       // 'userId': storage.getItem("userId"),
+        //'pharmacyId': storage.getItem("pharmacyId"),
+       // 'Ocp-Apim-Subscription-Key': appConfig.SUBR_KEY,
+      }
+    })
+      .then(response => response.data)
+      .catch(error => error.response);
+  }
   
 //   export const getNewsById = async (newsId) => {
   
