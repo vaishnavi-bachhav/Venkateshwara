@@ -62,9 +62,9 @@ namespace Venkateshwara.API.Services.News
 
                 var news = new NE.News
                 {
-                    Name = newsView.Name,
-                    Description = newsView.Description,
-                    Image = newsView.Image,
+                    Name = newsView.Name!.Trim(),
+                    Description = newsView.Description!.Trim(),
+                    Image = string.IsNullOrWhiteSpace(newsView.Image) ? AppConstants.NewsDefault : newsView.Image,
                     NewsDate = newsView.NewsDate,
                     AddedOn = currentDate,
                     ModifiedOn = currentDate,
@@ -91,10 +91,10 @@ namespace Venkateshwara.API.Services.News
 
                 if (news != null)
                 {
-                    news.Name = newsView.Name?.Trim();
-                    news.Description = newsView.Description?.Trim();
+                    news.Name = newsView.Name?.Trim() ?? news.Name;
+                    news.Description = newsView.Description?.Trim() ?? news.Description;
                     news.NewsDate = newsView.NewsDate;
-                    news.Image = newsView.Image;
+                    news.Image = newsView.Image ?? news.Image;
                     news.ModifiedOn = DateTime.Now; 
                     var updateResult = await _appDbContext.News.ReplaceOneAsync(b => b.Id == newsView.Id, news).ConfigureAwait(false);
 

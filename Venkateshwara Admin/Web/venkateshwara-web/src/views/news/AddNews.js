@@ -61,8 +61,6 @@ const AddNews = () => {
                   >
                     {({ values, errors }) => (
                       <Form>
-                        <pre>{JSON.stringify(values, null, 102)}</pre>
-                                            <pre>{JSON.stringify(errors, null, 102)}</pre>
                         <TextField label="News Name" name='title' type="text" />
                         <TextAreaField label="News Description" name="description" isRequired={false} />
                         {/* <TextField label="Date" name='date' type="date" isRequired={false} /> */}

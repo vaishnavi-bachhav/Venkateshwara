@@ -42,7 +42,7 @@ namespace Venkateshwara.API.Controllers
             return Ok(await _newsService.UpdateNews(newsView));
         }
 
-        [HttpDelete]
+        [HttpDelete("delete-news")]
         public async Task<IActionResult> DeleteNews(string id)
         {
             return Ok(await _newsService.DeleteNews(id));

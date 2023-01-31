@@ -22,7 +22,7 @@ const AllNews = () => {
         <div className="container p-5">
           <div className="row">
             {news.map((newsDetails, idx) => (
-              <NewsItem news={newsDetails} />
+              <NewsItem news={newsDetails} getNews={getNews}/>
             ))}
           </div>
         </div>
