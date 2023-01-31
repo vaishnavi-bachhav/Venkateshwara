@@ -4,7 +4,7 @@ using Venkateshwara.API.ViewModels;
 
 namespace Venkateshwara.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("career")]
     [ApiController]
     public class CareerController : ControllerBase
     {
@@ -19,13 +19,19 @@ namespace Venkateshwara.API.Controllers
         {
             if (string.IsNullOrWhiteSpace(id))
             {
-                return Ok(await _careerService.GetCareers());
+                return Ok();
             }
             return Ok(await _careerService.GetCareerById(id));
         }
 
-        [HttpPost]
-        public async Task<IActionResult> SaveCareer(CareerViewModel careerView)
+        [HttpGet("get-career")]
+        public async Task<IActionResult> GetCareer()
+        {
+            return Ok(await _careerService.GetCareers());
+        }
+
+        [HttpPost("save-career")]
+        public async Task<IActionResult> SaveCareer([FromBody] CareerViewModel careerView)
         {
             if (string.IsNullOrWhiteSpace(careerView.Id))
             {
@@ -34,7 +40,7 @@ namespace Venkateshwara.API.Controllers
             return Ok(await _careerService.UpdateCareer(careerView));
         }
 
-        [HttpDelete]
+        [HttpDelete("delete-career")]
         public async Task<IActionResult> DeleteCareer(string id)
         {
             return Ok(await _careerService.DeleteCareer(id));
