@@ -4,78 +4,81 @@ import * as Yup from 'yup';
 import { TextField } from 'src/components/shared/TextField';
 import { TextAreaField } from 'src/components/shared/TextAreaField';
 import { FileField } from 'src/components/shared/FileField';
-
-
-
-import {
-  CButton,
-  CCard,
-  CCardBody,
-  CCol,
-  CContainer,
-  CForm,
-  CFormInput,
-  CInputGroup,
-  CInputGroupText,
-  CRow,
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilLockLocked, cilUser } from '@coreui/icons'
 import { NavLink } from 'react-router-dom'
-
+import * as careerService from 'src/services/UserService';
+import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [initialValues, setInitialValues] = useState({
-    title: '',
-    number: '',
-    email:'',
-    address:'',
+    name: '',
+   // number: '',
+   // email: '',
+    address: '',
+    //password: '',
+    //confirmPassword: ''
   });
+  const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
-    title: Yup.string().min(2, 'Title should be minimum 2 characters.').max(50, 'Title should be maximum 50 characters.').required('Title is required.'),
-    address:Yup.string().min(10, 'Address should be minimum 10 characters.').max(12, 'Address should be maximum 12 characters.').required('Address is required.'),
-    number: Yup.string().min(10, 'Contact Number should be minimum 10 characters.').max(50, 'Contact Number should be maximum 12 characters.').required('Contact Number is required.'),
+    name: Yup.string().required('Name is required.'),
+    address: Yup.string().required('Address is required.'),
+   // number: Yup.string().required('Contact Number is required.'),
+    //password: Yup.string().required('Password is required.'),
+    //confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Password and confirm password should be matched.').required('Confirm password is required.')
   });
+
+  const addUser = values => {
+    debugger;
+    careerService.addUser(values).then(response => {
+      console.log("response", response);
+      navigate("/totalusers");
+      if (response) {
+        toast.success("News added successfully");
+      }
+      else {
+        toast.error("News addition failed");
+      }
+    });
+  }
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
-      <CContainer>
-        <CRow className="justify-content-center">
-          <CCol md={9} lg={7} xl={6}>
-            <CCard className="mx-4">
-              <CCardBody className="p-4">
-                <CForm>
-                  <h1>Register</h1>
-                  <p className="text-medium-emphasis">Create your account</p>
-                  <Formik
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    enableReinitialize
-                    onSubmit={values => {
-                      console.log("values", values)
-                    }}
-                  >
-                    {({ values, errors }) => (
-                      <Form>
-                        {/* <pre>{JSON.stringify(values, null, 102)}</pre>
+      <ToastContainer theme="colored" limit={1} />
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-md-6">
+            <div className="card">
+              <div className="card-header bg-success">
+                <h3 className="card-title text-white">Career</h3>
+              </div>
+              <div className="card-body">
+                <Formik
+                  initialValues={initialValues}
+                  validationSchema={validationSchema}
+                  enableReinitialize
+                  onSubmit={values => {
+                    addUser(values);
+                    console.log("values", values)
+                  }}
+                >
+                  {({ values, errors }) => (
+                    <Form>
+                      {/* <pre>{JSON.stringify(values, null, 102)}</pre>
                                             <pre>{JSON.stringify(errors, null, 102)}</pre> */}
-                        <TextField label="Full Name" name='title' type="text" />
-                        <TextField label="Contact Number" name="number" type="number" isRequired={false} />
-                        <TextField label="Email-Id" name="email" type="email" isRequired={false} />
-                        <TextField label="Address" name="address" type="text" isRequired={false} />
-                        <div className="d-grid">
-                          <CButton color="success">Create Account</CButton>
-                        </div>
-                      </Form>
-                    )}
-                  </Formik>
-
-                  <NavLink className="text-center" to="/login">I have already an accout ?Login</NavLink>
-                </CForm>
-              </CCardBody>
-            </CCard>
-          </CCol>
-        </CRow>
-      </CContainer>
+                      <TextField label="Full Name" name='name' type="text" />
+                      {/* <TextField label="Contact Number" name="number" type="text" isRequired={false} /> */}
+                      {/* <TextField label="Email" name="email" type="email" /> */}
+                      {/* <TextField label="Password" name="password" type="password" /> */}
+                      {/* <TextField label="Confirm Password" name="confirmPassword" type="password" /> */}
+                      <TextField as="textarea" label="Address" name="address" isRequired={false} />
+                      <button className='btn btn-success text-white w-100' type='submit'>Create Account</button>
+                    </Form>
+                  )}
+                </Formik>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

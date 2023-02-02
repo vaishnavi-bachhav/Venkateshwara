@@ -8,8 +8,6 @@ const AllProducts = React.lazy(() => import('./views/products/AllProducts'))
 const Profile = React.lazy(() => import('./views/Profile'))
 const TotalUsers = React.lazy(() => import('./views/TotalUsers'))
 
-
-
 // news
 const AddNews = React.lazy(() => import('./views/news/AddNews'))
 const AllNews = React.lazy(() => import('./views/news/AllNews'))
@@ -25,17 +23,12 @@ const AllCareer = React.lazy(() => import('./views/career/AllCareer'))
 const AddAchievements = React.lazy(() => import('./views/achievements/AddAchievements'))
 const AllAchievements = React.lazy(() => import('./views/achievements/AllAchievements'))
 
-
-
-
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/Register', name: 'Colors', element: Register },
   { path: '/login', name: 'Colors', element: Login },
   { path: '/profile', name: 'Colors', element: Profile },
-
-
 
   { path: '/AddProducts', name: 'products', element: AddProducts },
   { path: '/AllProducts', name: 'products', element: AllProducts },
@@ -50,10 +43,7 @@ const routes = [
 
   { path: '/addachievements', name: 'achievements', element: AddAchievements },
   { path: '/allachievements', name: 'achievements', element: AllAchievements },
-  { path: '/totalusers', name: 'achievements', element: TotalOrders },
-
-
-
+  { path: '/totalusers', name: 'achievements', element: TotalUsers },
 ]
 
 export default routes

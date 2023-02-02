@@ -64,6 +64,8 @@ namespace Venkateshwara.API.Services.User
                     Name = userView.Name,
                     Email = userView.Email,
                     Password = userView.Password,
+                    ContactNumber = userView.ContactNumber,
+                    Address = userView.Address,
                     Role = UserRole.User,
                     AddedOn = currentDate,
                     ModifiedOn = currentDate,

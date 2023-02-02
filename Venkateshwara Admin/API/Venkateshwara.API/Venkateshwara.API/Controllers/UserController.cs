@@ -24,8 +24,14 @@ namespace Venkateshwara.API.Controllers
             return Ok(await _userService.GetUserById(id));
         }
 
+        [HttpGet("get-users")]
+        public async Task<IActionResult> GetUsers()
+        {
+            return Ok(await _userService.GetUsers());
+        }
+
         [HttpPost("save-user")]
-        public async Task<IActionResult> SaveUser(UserViewModel userView)
+        public async Task<IActionResult> SaveUser([FromBody] UserViewModel userView)
         {
             if (string.IsNullOrWhiteSpace(userView.Id))
             {
