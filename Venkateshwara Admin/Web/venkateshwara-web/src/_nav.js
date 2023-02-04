@@ -34,10 +34,6 @@ const _nav = [
   },
 
   {
-    component: CNavTitle,
-    name: 'Additions',
-  },
-  {
     component: CNavGroup,
     name: 'Products',
     to: '/addproducts',

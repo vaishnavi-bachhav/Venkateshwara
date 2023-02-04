@@ -4,9 +4,9 @@ import * as api from '../components/shared/constants';
 export const addUser = async (values) => {
   const payload = {
     Name: values.name,
-   // Email: values.email,
-    //Password: values.password,
-    //ContactNumber: values.number,
+    Email: values.email,
+    Password: values.password,
+    ContactNumber: values.number,
     Address: values.address
   };
 

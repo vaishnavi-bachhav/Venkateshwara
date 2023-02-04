@@ -15,3 +15,11 @@ export const SAVE_USER_API = HOST + "user/save-user";
 export const GET_USER_API = HOST + "user/get-user";
 export const GET_USERS_API = HOST + "user/get-users";
 export const DELETE_USER_API = HOST + "user/delete-user";
+
+// Product
+export const SAVE_PRODUCT_API = HOST + "product/save-product";
+export const SAVE_PRODUCT_CATEGORY_API = HOST + "product/save-product-type";
+export const GET_PRODUCTS_API = HOST + "product/get-products";
+export const GET_PRODUCTS_CATEGORY_API = HOST + "product/get-product-types";
+export const DELETE_PRODUCT_API = HOST + "product/delete-product";
+export const DELETE_PRODUCT_CATEGROY_API = HOST + "product/delete-product-type";

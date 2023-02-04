@@ -11,20 +11,21 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [initialValues, setInitialValues] = useState({
     name: '',
-   // number: '',
-   // email: '',
+    number: '',
+    email: '',
     address: '',
-    //password: '',
-    //confirmPassword: ''
+    password: '',
+    confirmPassword: ''
   });
   const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required.'),
     address: Yup.string().required('Address is required.'),
-   // number: Yup.string().required('Contact Number is required.'),
-    //password: Yup.string().required('Password is required.'),
-    //confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Password and confirm password should be matched.').required('Confirm password is required.')
+    number: Yup.string().required('Contact Number is required.'),
+    email: Yup.string().required('Email is required.'),
+    password: Yup.string().required('Password is required.'),
+    confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Password and confirm password should be matched.').required('Confirm password is required.')
   });
 
   const addUser = values => {
@@ -65,10 +66,10 @@ const Register = () => {
                       {/* <pre>{JSON.stringify(values, null, 102)}</pre>
                                             <pre>{JSON.stringify(errors, null, 102)}</pre> */}
                       <TextField label="Full Name" name='name' type="text" />
-                      {/* <TextField label="Contact Number" name="number" type="text" isRequired={false} /> */}
-                      {/* <TextField label="Email" name="email" type="email" /> */}
-                      {/* <TextField label="Password" name="password" type="password" /> */}
-                      {/* <TextField label="Confirm Password" name="confirmPassword" type="password" /> */}
+                      <TextField label="Contact Number" name="number" type="text" isRequired={false} />
+                      <TextField label="Email" name="email" type="email" />
+                      <TextField label="Password" name="password" type="password" />
+                      <TextField label="Confirm Password" name="confirmPassword" type="password" />
                       <TextField as="textarea" label="Address" name="address" isRequired={false} />
                       <button className='btn btn-success text-white w-100' type='submit'>Create Account</button>
                     </Form>
