@@ -50,6 +50,11 @@ const _nav = [
       },
       {
         component: CNavItem,
+        name: 'Product Category',
+        to: '/productcategory',
+      },
+      {
+        component: CNavItem,
         name: 'View Products',
         to: '/AllProducts',
       },

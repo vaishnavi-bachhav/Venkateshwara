@@ -3,10 +3,16 @@ import React from 'react'
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Register = React.lazy(() => import('./views/Register'))
 const Login = React.lazy(() => import('./views/Login'))
+
+//products
 const AddProducts = React.lazy(() => import('./views/products/AddProducts'))
 const AllProducts = React.lazy(() => import('./views/products/AllProducts'))
+const ProductCategory = React.lazy(() => import('./views/products/ProductCategory'))
+
+//profile
 const Profile = React.lazy(() => import('./views/Profile'))
 const TotalUsers = React.lazy(() => import('./views/TotalUsers'))
+
 
 // news
 const AddNews = React.lazy(() => import('./views/news/AddNews'))
@@ -32,6 +38,8 @@ const routes = [
 
   { path: '/AddProducts', name: 'products', element: AddProducts },
   { path: '/AllProducts', name: 'products', element: AllProducts },
+  { path: '/productcategory', name: 'products', element: ProductCategory },
+
 
   { path: '/addnews', name: 'News', element: AddNews },
   { path: '/allnews', name: 'News', element: AllNews },
