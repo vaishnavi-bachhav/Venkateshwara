@@ -35,13 +35,13 @@ const AppHeaderDropdown = () => {
   
         <CDropdownItem to="/profile">
           <CIcon icon={cilUser} className="me-2" />
-          Profile
+           My Profile
         </CDropdownItem>
         
         <CDropdownDivider />
-        <CDropdownItem href="#">
+        <CDropdownItem >
           <CIcon icon={cilLockLocked} className="me-2" />
-          Lock Account
+          Logout
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>

@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { TextField } from 'src/components/shared/TextField';
 import { TextAreaField } from 'src/components/shared/TextAreaField';
 import { FileField } from 'src/components/shared/FileField';
+import { DropdownField } from 'src/components/shared/DropdownField';
 import * as productService from 'src/services/ProductService';
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
@@ -12,19 +13,23 @@ import { useNavigate } from "react-router-dom";
 const AddProduct = () => {
   const [initialValues, setInitialValues] = useState({
     name: '',
-    // size: '',
-    // category:'',
-    // price:'',
+    size: '',
+    category:'',
+    price:'',
     // image: '',
-    // description: '',
+    rating: 0,
+    description: '',
   });
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().min(2, 'Title should be minimum 2 characters.').max(50, 'Title should be maximum 50 characters.').required('Title is required.'),
-    // description: Yup.string().min(2, 'Description should be minimum 2 characters.').max(500, 'Description should be maximum 50 characters.').required('Description is required.'),
-    // size: Yup.string().min(2, 'size should be minimum 2 characters.').max(500, 'size should be maximum 10 characters.').required('size is required.'),
+     description: Yup.string().min(2, 'Description should be minimum 2 characters.').max(500, 'Description should be maximum 50 characters.').required('Description is required.'),
+     size: Yup.string().min(2, 'size should be minimum 2 characters.').max(500, 'size should be maximum 10 characters.').required('size is required.'),
+     price: Yup.string().required('Price is required.'),
+     category: Yup.string().required('Please select assigned to'),
     // category: Yup.string().min(2, 'Description should be minimum 2 characters.').max(500, 'Category should be maximum 10 characters.').required('Category is required.'),
     // image: Yup.mixed().required("Please select image"),
+    rating: Yup.number().required('Rating is required.')
   });
 
   const navigate = useNavigate();
@@ -42,6 +47,19 @@ const AddProduct = () => {
    }
    });
   }
+
+  const [news, setNews] = useState([]);
+
+  const getNews = () => {
+    productService.getProductsCategory().then(response => {
+      console.log(response);
+      setNews(response);
+    });
+  }
+
+  useEffect(() => {
+    getNews();
+  }, []);
 
   return (
     <div>
@@ -70,11 +88,12 @@ const AddProduct = () => {
                         {/* <pre>{JSON.stringify(values, null, 102)}</pre>
                                             <pre>{JSON.stringify(errors, null, 102)}</pre> */}
                         <TextField label="Product Name" name='name' type="text" />
-                        {/* <TextAreaField label="Product Description" name="description" isRequired={false} />
+                        <TextField label="Product Description" name='description' as="textarea"/>
                         <TextField label="Product Size" name='size' type="text" />
                         <TextField label="Product Price" name='price' type="text" />
-                        <TextField label="Category" name='category' type="text" />
-                        <FileField label="Image" name="image" /> */}
+                        <TextField label="Product Rating" name='rating' type="number" />
+                        <DropdownField label='Category' options={news} defaultOption='Select Category' name='category'/> 
+                        {/* <FileField label="Image" name="image" /> */}
                         <button className='btn btn-success text-white w-100' type='submit'>Add Products</button>
                       </Form>
                     )}

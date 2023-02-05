@@ -4,6 +4,9 @@ import * as Yup from 'yup';
 import { TextField } from 'src/components/shared/TextField';
 import { TextAreaField } from 'src/components/shared/TextAreaField';
 import { FileField } from 'src/components/shared/FileField';
+import * as achievementService from 'src/services/AchievementService';
+import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 const AddAchievements = () => {
     const [initialValues, setInitialValues] = useState({
@@ -12,15 +15,32 @@ const AddAchievements = () => {
         image: '',
         description: '',
     });
+    const navigate = useNavigate();
 
     const validationSchema = Yup.object().shape({
         title: Yup.string().min(2, 'Title should be minimum 2 characters.').max(50, 'Title should be maximum 50 characters.').required('Title is required.'),
         description: Yup.string().min(2, 'Description should be minimum 2 characters.').max(500, 'Description should be maximum 50 characters.').required('Description is required.'),
-        image: Yup.mixed().required("Please select image"),
+       // image: Yup.mixed().required("Please select image"),
     });
+
+    const addNews = values => {
+        debugger;
+        achievementService.addAchievement(values).then(response => {
+       console.log("response", response);
+          navigate("/allachievements");
+       if(response){
+        toast.success("News added successfully");
+       }
+       else{
+        toast.error("News addition failed");
+       }
+       });
+      }
 
     return (
         <div>
+            <ToastContainer theme="colored" limit={1} />
+
             <section className="content">
                 <div className="container-fluid">
                     <div className="row">
@@ -35,6 +55,7 @@ const AddAchievements = () => {
                                     validationSchema={validationSchema}
                                     enableReinitialize
                                     onSubmit={values => {
+                                        addNews(values);
                                         console.log("values", values)
                                     }}
                                 >

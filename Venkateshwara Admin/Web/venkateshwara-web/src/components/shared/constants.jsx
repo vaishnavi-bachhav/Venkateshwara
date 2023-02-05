@@ -23,3 +23,8 @@ export const GET_PRODUCTS_API = HOST + "product/get-products";
 export const GET_PRODUCTS_CATEGORY_API = HOST + "product/get-product-types";
 export const DELETE_PRODUCT_API = HOST + "product/delete-product";
 export const DELETE_PRODUCT_CATEGROY_API = HOST + "product/delete-product-type";
+
+// Achievements
+export const SAVE_ACHIEVEMENT_API = HOST + "achievement/save-achievement";
+export const GET_ACHIEVEMENTS_API = HOST + "achievement/get-achievements";
+export const DELETE_ACHIEVEMENT_API = HOST + "achievement/delete-achievement";

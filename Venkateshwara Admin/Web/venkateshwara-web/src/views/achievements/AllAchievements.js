@@ -1,86 +1,72 @@
-import React from 'react'
+import * as achievementService from 'src/services/AchievementService';
+import React, { useState, useEffect } from 'react'
+import swal from 'sweetalert';
 
 const AllAchievements = () => {
+    const [career, setCareer] = useState([]);
+
+    const getCareer = () => {
+        achievementService.getAchievements().then(response => {
+            console.log(response);
+            setCareer(response);
+        });
+    }
+
+    const deleteCareer = (id) => {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this career!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    achievementService.deleteAchievement(id).then(response => {
+                        swal("Career has been deleted!", {
+                            icon: "success",
+                        });
+                        getCareer();
+                    });
+                }
+            });
+    }
+    useEffect(() => {
+        getCareer();
+    }, []);
+
     return (
         <div>
             <section className="content">
 
                 <div className="row">
                     <div className="col-12">
-                        <div className="">
-                            <div className="card-header">
-                                {/* <div className="card-tools">
-                                    <div className="input-group input-group-sm" style={{ width: "150px;" }}>
-                                        <input type="text" name="table_search" className="form-control float-right"
-                                            placeholder="Search" />
-
-                                        <div className="input-group-append">
-                                            <button type="submit" className="btn btn-default">
-                                                <i className="fas fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div> */}
-                            </div>
-                            {/* <!-- /.card-header --> */}
-                            <div className="card-body table-responsive p-0">
-                                <table className="table table-hover text-nowrap">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Total</th>
-                                            <th>Status</th>
-                                            <th>Date</th>
+                        <table className="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Sr. No</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Image</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {career.map((c, index) => {
+                                    return (
+                                        <tr key={c.id} >
+                                            <td>{index + 1}</td>
+                                            <td>{c.name}</td>
+                                            <td>{c.description}</td>
+                                            <td><img alt={c.name} src={c.image} width="70" height="70" /></td>
+                                            <td><button className='btn btn-danger' onClick={() => { deleteCareer(c.id) }}>Delete</button></td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>183</td>
-                                            <td>John Doe</td>
-                                            <td>11-7-2014</td>
-                                            <td><span className="tag tag-success">Approved</span></td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>219</td>
-                                            <td>Alexander Pierce</td>
-                                            <td>11-7-2014</td>
-                                            <td><span className="tag tag-warning">Pending</span></td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>657</td>
-                                            <td>Bob Doe</td>
-                                            <td>11-7-2014</td>
-                                            <td><span className="tag tag-primary">Approved</span></td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>175</td>
-                                            <td>Mike Doe</td>
-                                            <td>11-7-2014</td>
-                                            <td><span className="tag tag-danger">Denied</span></td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            {/* <!-- /.card-body --> */}
-                        </div>
-                        {/* <!-- /.card --> */}
+                                    )
+                                })}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-
-
             </section >
         </div>
     )

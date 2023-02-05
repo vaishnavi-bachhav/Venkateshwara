@@ -24,8 +24,14 @@ namespace Venkateshwara.API.Controllers
             return Ok(await _achievementService.GetAchievementById(id));
         }
 
+        [HttpGet("get-achievements")]
+        public async Task<IActionResult> GetAchievements()
+        {
+            return Ok(await _achievementService.GetAchievements());
+        }
+
         [HttpPost("save-achievement")]
-        public async Task<IActionResult> SaveAchievements(AchievementsViewModel achievementsView)
+        public async Task<IActionResult> SaveAchievements([FromBody] AchievementsViewModel achievementsView)
         {
             if (string.IsNullOrWhiteSpace(achievementsView.Id))
             {
@@ -34,7 +40,7 @@ namespace Venkateshwara.API.Controllers
             return Ok(await _achievementService.UpdateAchievement(achievementsView));
         }
 
-        [HttpDelete("delete-achievement/{id}")]
+        [HttpDelete("delete-achievement")]
         public async Task<IActionResult> DeleteAchievement(string id)
         {
             return Ok(await _achievementService.DeleteAchievement(id));

@@ -4,6 +4,11 @@ import * as api from '../components/shared/constants';
 export const addProduct = async (values) => {
   const payload = {
     Name: values.name,
+    Size: values.size,
+    Description: values.description,
+    Price: parseFloat(values.price),
+    Rating: parseInt(values.rating),
+    ProductTypeId: values.category
    // Email: values.email,
    // Password: values.password,
    // ContactNumber: values.number,

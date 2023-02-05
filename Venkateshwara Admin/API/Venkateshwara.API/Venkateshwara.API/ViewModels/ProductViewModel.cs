@@ -18,6 +18,7 @@ namespace Venkateshwara.API.ViewModels
             Image = product.Image;
             ProductTypeId = product.ProductTypeId;
             Price = product.Price;
+            Quantity = product.Quantity;    
             Rating = product.Rating;
             Size = product.Size;
         }

@@ -63,7 +63,7 @@ namespace Venkateshwara.API.Services.Achievements
                 {
                     Name = achievementsView.Name,
                     Description = achievementsView.Description,
-                    Image = achievementsView.Image,
+                    Image = string.IsNullOrWhiteSpace(achievementsView.Image) ? AppConstants.AchievementsDefault : achievementsView.Image,
                     AchievementDate = achievementsView.AchievementDate,
                     AddedOn = currentDate,
                     ModifiedOn = currentDate,

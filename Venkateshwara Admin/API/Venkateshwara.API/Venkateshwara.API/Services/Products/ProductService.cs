@@ -85,6 +85,7 @@ namespace Venkateshwara.API.Services.Products
                     Description = productView.Description,
                     Image = productView.Image,
                     ProductTypeId = productView.ProductTypeId,
+                    Quantity = productView.Quantity,
                     Price = productView.Price,
                     Rating = productView.Rating,
                     Size = productView.Size,
