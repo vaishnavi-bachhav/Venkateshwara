@@ -67,5 +67,21 @@ namespace Venkateshwara.API.Data
                 return _mongoDatabase.GetCollection<Users>(nameof(Users));
             }
         }
+
+        public IMongoCollection<Invoice> Invoices
+        {
+            get
+            {
+                return _mongoDatabase.GetCollection<Invoice>(nameof(Invoice));
+            }
+        }
+
+        public IMongoCollection<Order> Orders
+        {
+            get
+            {
+                return _mongoDatabase.GetCollection<Order>(nameof(Order));
+            }
+        }
     }
 }

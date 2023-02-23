@@ -7,8 +7,13 @@ import "../../../node_modules/bootstrap/dist/js/bootstrap.bundle"
 import * as productService from 'src/services/ProductService';
 import { ToastContainer, toast } from 'react-toastify';
 import swal from 'sweetalert';
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
 
 const ProductCategory = () => {
+  const handleClosePopup = () => setShowPopup(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const handleShowPopup = () => setShowPopup(true);
   const [initialValues, setInitialValues] = useState({
     name: '',
   });
@@ -39,23 +44,27 @@ const ProductCategory = () => {
 
   const deleteCareer = (id) => {
     swal({
-        title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this career!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this career!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
     })
-        .then((willDelete) => {
-            if (willDelete) {
-                productService.deleteProductCategory(id).then(response => {
-                    swal("Career has been deleted!", {
-                        icon: "success",
-                    });
-                    getNews();
-                });
-            }
-        });
-}
+      .then((willDelete) => {
+        if (willDelete) {
+          productService.deleteProductCategory(id).then(response => {
+            swal("Career has been deleted!", {
+              icon: "success",
+            });
+            getNews();
+          });
+        }
+      });
+  }
+  const openLeaveModal = () => {
+    setInitialValues(initialValues);
+    handleShowPopup();
+  };
 
   return (
     <div>
@@ -69,57 +78,19 @@ const ProductCategory = () => {
                 <h4>Product Categories</h4>
               </div>
 
-              <div className="col md-4 text-end justify-content-center mb-2">
+              <div className="md-4 text-end justify-content-center mb-2">
                 {/* <!-- Button trigger modal --> */}
-                <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style={{ backgroundColor: "#508bfc" }}>
-                  Add Product Category
+                <button
+                  type="submit"
+                  className="btn btn-success btn-user"
+                  onClick={() => openLeaveModal()}
+                >
+                  <i className="fa-solid fa-plus"></i> Leave
                 </button>
-
-                {/* <!-- Modal --> */}
-                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div className="modal-dialog">
-                    <div className="modal-content">
-                      <div className="modal-header">
-                        <h4>Add Product Category</h4>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div className="modal-body" >
-                        <section className="text-center">
-                          <div className=" py-2">
-                            <div className="row">
-                              <div className="text-center">
-                                <div className=" " >
-                                  <div className="card-body">
-                                    <Formik
-                                      initialValues={initialValues}
-                                      validationSchema={validationSchema}
-                                      enableReinitialize
-                                      onSubmit={values => {
-                                        addNews(values);
-                                        console.log("values", values)
-                                      }}
-                                    >
-                                      {({ values, errors }) => (
-                                        <Form>
-                                          <TextField label="Product Name" name='name' type="text" />
-                                          <button className='btn btn-success text-white w-100' type='submit'>Add Products Category</button>
-                                        </Form>
-                                      )}
-                                    </Formik>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </section>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
-            <table className="table table-striped table-hover text-center">
-              <thead>
+            <table className="table table-bordered table-responsive-sm ft-sz">
+              <thead className="table-primary">
                 <tr>
                   <th scope="col">Sr. No.</th>
                   <th scope="col">Product Name</th>
@@ -127,7 +98,7 @@ const ProductCategory = () => {
                 </tr>
               </thead>
               <tbody>
-              {news.map((c, index) => {
+                {news.map((c, index) => {
                   return (
                     <tr key={c.id} >
                       <td>{index + 1}</td>
@@ -141,6 +112,42 @@ const ProductCategory = () => {
           </div>
         </div>
       </div>
+      <Dialog fullWidth={true} open={showPopup} onClose={handleClosePopup}>
+        <DialogContent>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            enableReinitialize
+            onSubmit={values => {
+              addNews(values);
+              console.log("values", values)
+            }}
+          >
+            {({ values, errors }) => (
+              <Form className='p-2'>
+                <h3>
+                  <i className="fa-solid fa-calendar-xmark text-danger"></i>{" "}
+                  Add Product Category{" "}
+                </h3>
+                <hr />
+                <TextField label="Product Name" name='name' type="text" />
+                <div className="text-right">
+                  <button type="submit" className="btn btn-success btn-user mr-2">
+                    Save
+                  </button>
+                  <button
+                    onClick={handleClosePopup}
+                    type="button"
+                    className="btn btn-outline-secondary btn-user"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </Form>
+            )}
+          </Formik>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

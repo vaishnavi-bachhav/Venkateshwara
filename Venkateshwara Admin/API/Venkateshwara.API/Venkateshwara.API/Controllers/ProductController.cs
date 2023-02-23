@@ -36,6 +36,12 @@ namespace Venkateshwara.API.Controllers
             return Ok(await _productService.GetProductTypes());
         }
 
+        [HttpGet("get-dashboard")]
+        public async Task<IActionResult> GetDashboard()
+        {
+            return Ok(await _productService.GetDashboard());
+        }
+
         [HttpPost("save-product")]
         public async Task<IActionResult> SaveProduct([FromBody] ProductViewModel productView)
         {

@@ -52,17 +52,23 @@ const AllAchievements = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {career.map((c, index) => {
-                                    return (
-                                        <tr key={c.id} >
-                                            <td>{index + 1}</td>
-                                            <td>{c.name}</td>
-                                            <td>{c.description}</td>
-                                            <td><img alt={c.name} src={c.image} width="70" height="70" /></td>
-                                            <td><button className='btn btn-danger' onClick={() => { deleteCareer(c.id) }}>Delete</button></td>
-                                        </tr>
-                                    )
-                                })}
+                                {career.length === 0 ? (
+                                    <tr><td>No data found</td></tr>
+                                ) : (
+                                    <tbody>
+                                        {career.map((c, index) => {
+                                            return (
+                                                <tr key={c.id} >
+                                                    <td>{index + 1}</td>
+                                                    <td>{c.name}</td>
+                                                    <td>{c.description}</td>
+                                                    <td><img alt={c.name} src={c.image} width="70" height="70" /></td>
+                                                    <td><button className='btn btn-danger' onClick={() => { deleteCareer(c.id) }}>Delete</button></td>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                )}
                             </tbody>
                         </table>
                     </div>

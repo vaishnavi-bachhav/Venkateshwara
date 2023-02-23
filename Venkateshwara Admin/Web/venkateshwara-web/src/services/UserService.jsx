@@ -20,6 +20,22 @@ export const addUser = async (values) => {
     .catch(error => error.response);
 }
 
+export const login = async (values) => {
+  const payload = {
+    Email: values.email,
+    Password: values.password,
+  };
+
+  return axios.post(api.LOGIN_API, payload, {
+    headers: {
+      'Content-Type': 'application/json',
+      // 'userId': storage.getItem("userId")
+    }
+  })
+    .then(response => response.data)
+    .catch(error => error.response);
+}
+
 //   export const updateNews = async (values, id) => {
 
 //     const newsViewModel = {

@@ -51,6 +51,31 @@ namespace Venkateshwara.API.Services.Products
             }
         }
 
+        public async Task<DashboardViewModel> GetDashboard()
+        {
+            try
+            {
+                var totalNews = await _appDbContext.News.Find(f => true).CountDocumentsAsync();
+                var totalOrders = await _appDbContext.Orders.Find(f => true).CountDocumentsAsync();
+                var totalProducts = await _appDbContext.Products.Find(f => true).CountDocumentsAsync();
+                var totalUsers = await _appDbContext.Users.Find(f => true).CountDocumentsAsync();
+
+                var dashboard = new DashboardViewModel
+                {
+                    TotalNews = (int)totalNews,
+                    TotalOrders = (int)totalOrders,
+                    TotalProducts = (int)totalProducts,
+                    TotalUsers = (int)totalUsers,
+                };
+                return dashboard;
+            }
+            catch (Exception ex)
+            {
+                await _sharedService.LogError(ex, nameof(ProductService), nameof(GetDashboard));
+                return new DashboardViewModel();
+            }
+        }
+
         public async Task<ProductViewModel> GetProductById(string id)
         {
             try

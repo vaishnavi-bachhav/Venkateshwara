@@ -45,5 +45,11 @@ namespace Venkateshwara.API.Controllers
         {
             return Ok(await _userService.DeleteUser(id));
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginViewModel userView)
+        {
+            return Ok(await _userService.Login(userView));
+        }
     }
 }
