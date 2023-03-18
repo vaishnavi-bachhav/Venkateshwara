@@ -18,6 +18,7 @@ const AddProduct = () => {
     price:'',
     // image: '',
     rating: 0,
+    quantity:0,
     description: '',
   });
 
@@ -29,7 +30,8 @@ const AddProduct = () => {
      category: Yup.string().required('Please select assigned to'),
     // category: Yup.string().min(2, 'Description should be minimum 2 characters.').max(500, 'Category should be maximum 10 characters.').required('Category is required.'),
     // image: Yup.mixed().required("Please select image"),
-    rating: Yup.number().required('Rating is required.')
+    rating: Yup.number().required('Rating is required.'),
+    quantity: Yup.number().required('Quantity is required')
   });
 
   const navigate = useNavigate();
@@ -92,6 +94,7 @@ const AddProduct = () => {
                         <TextField label="Product Size" name='size' type="text" />
                         <TextField label="Product Price" name='price' type="text" />
                         <TextField label="Product Rating" name='rating' type="number" />
+                        <TextField label="Product Quantity" name='quantity' type="number" />
                         <DropdownField label='Category' options={news} defaultOption='Select Category' name='category'/> 
                         {/* <FileField label="Image" name="image" /> */}
                         <button className='btn btn-success text-white w-100' type='submit'>Add Products</button>

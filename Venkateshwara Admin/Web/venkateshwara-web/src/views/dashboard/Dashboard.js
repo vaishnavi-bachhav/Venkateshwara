@@ -32,10 +32,6 @@ const Dashboard = () => {
   return (
     <>
       <WidgetsDropdown />
-    
-
-
-     
     </>
   )
 }

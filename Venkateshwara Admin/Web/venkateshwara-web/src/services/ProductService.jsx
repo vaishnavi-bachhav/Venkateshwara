@@ -8,7 +8,8 @@ export const addProduct = async (values) => {
     Description: values.description,
     Price: parseFloat(values.price),
     Rating: parseInt(values.rating),
-    ProductTypeId: values.category
+    ProductTypeId: values.category,
+    Quantity: parseInt(values.quantity)
    // Email: values.email,
    // Password: values.password,
    // ContactNumber: values.number,

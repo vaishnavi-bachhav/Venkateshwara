@@ -116,15 +116,15 @@ const _nav = [
       },
     ],
   },
+  // {
+  //   component: CNavItem,
+  //   name: 'My Profile',
+  //   to: '/profile',
+  //   icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+  // },
   {
     component: CNavItem,
-    name: 'My Profile',
-    to: '/profile',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Total Registered Users',
+    name: 'Registered Users',
     to: '/totalusers',
     icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
   },

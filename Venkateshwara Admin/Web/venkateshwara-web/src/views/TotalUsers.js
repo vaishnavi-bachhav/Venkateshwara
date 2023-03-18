@@ -30,19 +30,21 @@ const TotalUsers = () => {
                   <th>Address</th>
                 </tr>
               </thead>
-              <tbody>
-                {news.map((c, index) => {
-                  return (
-                    <tr key={c.id} >
-                      <td>{index + 1}</td>
-                      <td>{c.name}</td>
-                      <td>{c.email}</td>
-                      <td>{c.contactNumber}</td>
-                      <td>{c.address}</td>
-                    </tr>
-                  )
-                })}
-              </tbody>
+                {news.length === 0 ? (
+                  <tr><td>No data found.</td></tr>
+                ) : (
+                  <tbody>{news.map((c, index) => {
+                    return (
+                      <tr key={c.id} >
+                        <td>{index + 1}</td>
+                        <td>{c.name}</td>
+                        <td>{c.email}</td>
+                        <td>{c.contactNumber}</td>
+                        <td>{c.address}</td>
+                      </tr>
+                    )
+                  })}</tbody>
+                )}
             </table>
           </div>
         </div>
